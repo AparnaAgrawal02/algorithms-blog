@@ -1,0 +1,21 @@
+#puzzle {
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+#difficulty{
+  top:93%;
+  left:1%;
+  width:30px;
+  height:25px;
+  position: absolute; 
+}
+#solve{
+  top:93%;
+  left:10%;
+  width:60px;
+  height:30px;
+  position: absolute; 
+}

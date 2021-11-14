@@ -1,4 +1,16 @@
 <html>
+<head>
   <title>Towers of Hanoi</title>
+  <link rel="stylesheet" href="towerofhanoi.css">
+</head>
 
+<body onload="init();">
+
+            <label for="disks">Disks: </label>
+            <input type="number" min="3" max="10" id="disks"required>
+            <input id = solve type="button" value="Solution">
+
+  <canvas id="canvas" style="width: 700px; height: 400px;"></canvas>
+    <script src="towerofhanoi.js"></script>
+</body>
 </html>
