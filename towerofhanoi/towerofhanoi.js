@@ -114,8 +114,12 @@ function drawDisks(state) {
   })
 }
 var delay = 1;
+var mult =1
 // move disk from one peg to another
 function moveDisk(from, to) {
+  if (flag){
+    mult =500
+  }
   setTimeout(function () {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     var movingDisk = from.disks.pop();
@@ -127,7 +131,7 @@ function moveDisk(from, to) {
     drawPegs();
     drawDisks(pegsState);
     //win()
-  }, 1000 * delay)
+  }, mult * delay)
   if (flag) {
     delay++;
   }
