@@ -4,29 +4,29 @@ var ctx;
 var difficulty = 3;
 var num = difficulty * difficulty
 
-var tiles = [1, 2, 3,4,5,6,7,8, 0];
-var goal =  [1, 2, 3,4,5,6,7,8, 0];
+var tiles = [1, 2, 3, 4, 5, 6, 7, 8, 0];
+var goal = [1, 2, 3, 4, 5, 6, 7, 8, 0];
 /* var tiles = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0];
 var goal =  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0]; */
 var tiles_details = []
 var tile0_pos = num - 1;
 var solution = document.getElementById('solve');
-solution.addEventListener('click',solve);
+solution.addEventListener('click', solve);
 
 var input = document.getElementById('difficulty');
-input.addEventListener('change', updateValue); 
- function updateValue(){
+input.addEventListener('change', updateValue);
+function updateValue() {
     difficulty = Number(input.value);
-    num = difficulty*difficulty
-    tile0_pos=num-1;
-    tiles =[]
-    goal=[]
-    for (i = 1; i < num ; i++){
+    num = difficulty * difficulty
+    tile0_pos = num - 1;
+    tiles = []
+    goal = []
+    for (i = 1; i < num; i++) {
         tiles.push(i);
         goal.push(i);
     }
     tiles.push(0);
-        goal.push(0);
+    goal.push(0);
     init();
 }
 /* init a new puzzle */
@@ -38,10 +38,10 @@ function init() {
     canvas.style.border = "1px solid black";
     shuffle();
     draw_puzzle();
-    if(!flag){
-    usergame()
+    if (!flag) {
+        usergame()
     }
-    
+
 
 }
 /* draw initial puzzle state on canvas */
@@ -118,12 +118,12 @@ function moveable() {
     var t1 = []
     if (tile0_pos - difficulty >= 0) {
         t1.push(tile0_pos - difficulty)
-        console.log("oh",tile0_pos - difficulty,tile0_pos ,difficulty)
+        console.log("oh", tile0_pos - difficulty, tile0_pos, difficulty)
     }
-    if (tile0_pos - 1 >= 0 && (tile0_pos)%difficulty!=0) {
+    if (tile0_pos - 1 >= 0 && (tile0_pos) % difficulty != 0) {
         t1.push(tile0_pos - 1)
     }
-    if (tile0_pos + 1 < num && (tile0_pos + 1)%difficulty!=0 ) {
+    if (tile0_pos + 1 < num && (tile0_pos + 1) % difficulty != 0) {
         t1.push(tile0_pos + 1)
     }
     if (tile0_pos + difficulty < num) {
@@ -136,11 +136,11 @@ function moveable_solve(zeropos) {
     if (zeropos - difficulty >= 0) {
         t1.push(zeropos - difficulty)
     }
-    if (zeropos - 1 >= 0 && (zeropos)%difficulty!=0) {
-        t1.push(zeropos- 1)
+    if (zeropos - 1 >= 0 && (zeropos) % difficulty != 0) {
+        t1.push(zeropos - 1)
     }
-    if ((zeropos + 1) < num && (zeropos + 1)%difficulty!=0 ) {
-        t1.push(zeropos+ 1)
+    if ((zeropos + 1) < num && (zeropos + 1) % difficulty != 0) {
+        t1.push(zeropos + 1)
     }
     if (zeropos + difficulty < num) {
         t1.push(zeropos + difficulty)
@@ -150,8 +150,12 @@ function moveable_solve(zeropos) {
 }
 
 var delay = 1;
+var mult = 1;
 // move disk from one peg to another
 function moveTile(t) {
+    if(flag){
+        mult =400;
+    }
     setTimeout(function () {
         var id = tiles[t.curpos]
         tiles[t.curpos] = 0
@@ -163,7 +167,7 @@ function moveTile(t) {
 
         draw_puzzle()
         //win()
-    }, 400 * delay)
+    }, mult* delay)
     if (flag) {
         delay++;
     }
@@ -187,7 +191,7 @@ function shuffle() {
         tiles[tile0_pos] = id
         tiles[m[to]] = 0
         tile0_pos = m[to]
-    
+
 
     }
 }
@@ -201,26 +205,27 @@ function huristic(current) {
     }
     return temp;
 }
-function sortqueue(pqueue){
+
+function sortqueue(pqueue) {
     pqueue.sort((a, b) => {
         return a.priority - b.priority;
     });
 }
 function solve() {
-    var inv=0;
-    for (var i=0; i<16; ++i){
-        for (var j=0; j<i; ++j){
+    var inv = 0;
+    for (var i = 0; i < 16; ++i) {
+        for (var j = 0; j < i; ++j) {
             if (tiles[j] > tiles[i])
                 ++inv;
         }
     }
-for (var  i=0; i<16; ++i){
-    if (tiles[i] == 0)
-        inv += 1 + i / 4;
-}
-if(inv&1){
-    console.log("solvable");
-}
+    for (var i = 0; i < 16; ++i) {
+        if (tiles[i] == 0)
+            inv += 1 + i / 4;
+    }
+    if (inv & 1) {
+        console.log("solvable");
+    }
     let pqueue = [];
     let final = [];
     // Set initial state
@@ -234,46 +239,46 @@ if(inv&1){
     //console.log(tiles)
     // Push current state into the queue
     pqueue.push(state);
-    var count =0;
+    var count = 0;
     visited = new Set();
     while (true) {
         var cur = pqueue.shift()
-        count+=1
-        /* if(count ==500){
-            break;
-        } */
+        count += 1
+        // if(count ==500){
+        //     break;
+        // }
         var moveable_tiles = moveable_solve(cur.moved_tile);
         moveable_tiles.forEach(ti => {
-            var dup =[]
-            var b =cur.board
-            for(var i = 0; i < num; ++i){
+            var dup = []
+            var b = cur.board
+            for (var i = 0; i < num; ++i) {
                 dup.push(b[i])
             }
 
             dup[cur.moved_tile] = dup[ti]
             dup[ti] = 0
-           // console.log(cur)
+            // console.log(cur)
 
-        var repeat =0
-        for (let item of visited.keys()) {
-            //console.log(item.toString() ,dup.toString())
-            if(JSON.stringify(item) == JSON.stringify(dup)){
-            repeat =1
-            break;
+            var repeat = 0
+            for (let item of visited.keys()) {
+                //console.log(item.toString() ,dup.toString())
+                if (JSON.stringify(item) == JSON.stringify(dup)) {
+                    repeat = 1
+                    break;
+                }
             }
-          }
 
-            if (!repeat ) {
+            if (!repeat) {
                 var state1 = {
                     board: dup,
                     moved_tile: ti,
                     moves: cur.moves + 1,
-                    priority:cur.moves + huristic(dup),
+                    priority: huristic(dup),
                     previous: cur
                 }
-              
-                var x=pqueue.push(state1)
-               
+
+                var x = pqueue.push(state1)
+
             }
         })
         final.push(cur);
@@ -282,43 +287,27 @@ if(inv&1){
         }
         visited.add(cur.board);
         sortqueue(pqueue);
-        
+
     }
     console.log(final)
-    reconstruct(final[final.length-1])
+    reconstruct(final[final.length - 1])
 }
 
-function reconstruct(ans){
-arr = []
-flag =1
-console.log(ans);
-while(ans!= null){
-arr.push(ans.moved_tile)
-ans = ans.previous
+function reconstruct(ans) {
+    arr = []
+    flag = 1
+    console.log(ans);
+    while (ans != null) {
+        arr.push(ans.moved_tile)
+        ans = ans.previous
+    }
+    console.log(arr);
+    arr.reverse()
+    arr.forEach(i => {
+        moveTile(tiles_details[i])
+        console.log(i);
+    })
 }
-console.log(arr);
-arr.reverse()
-arr.forEach(i => {
-    moveTile(tiles_details[i])
-    console.log(i);
-})
-}
 
-// function check_win() {
-//     var win = true, i, c, ctx;
 
-//     for(i = 0; i != 16; ++i) {
-//         win = win && (window.puzzle[i] === i+1);
-//     }
-
-//     if(win) {
-//         c = document.getElementById('puzzle');
-//         ctx = c.getContext('2d');
-//         ctx.drawImage(document.getElementById('origin'), 3 * TILE_WIDTH, 3 * TILE_WIDTH, TILE_WIDTH, TILE_WIDTH, 3 * TILE_WIDTH, 3 * TILE_WIDTH, TILE_WIDTH, TILE_WIDTH);
-//         c.onclick = '';
-//         document.getElementById('msg').innerHTML = 'YOU WIN!<br>Refresh the page to play again.';
-//     }
-
-//     return win;
-// }
 
