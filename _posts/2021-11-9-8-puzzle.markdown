@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "15 puzzle!!"
-//date:   2021-10-06 14:24:45 +0530
+//date:   2021-11-06 14:24:45 +0530
 categories: jekyll update
 ---
 <iframe width="700" height="500" frameborder="0" scrolling="no" src="../../../../../15-puzzle/15-puzzle.html"></iframe>
