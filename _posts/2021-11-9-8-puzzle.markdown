@@ -142,12 +142,12 @@ Breadth-first search starts by searching a start node, followed by its adjacent 
                 dup[cur.moved_tile] = dup[ti]
                 dup[ti] = 0
 
-            repeat =0
-            for state in visited:
-                if(state == cureentstate):
-                repeat =1
-                break
-          
+                repeat =0
+                for state in visited:
+                    if(state == cureentstate):
+                        repeat =1
+                        break
+            
             if (!repeat):
                 stat1 = stateNode(dup,ti,currentstate)
                 queue.append(state1)
@@ -176,28 +176,28 @@ Depth first search (DFS) algorithm starts with the initial node of the graph G, 
     visited = []
     def DFS(currentpuzzle,visited,Goal):
         visited.append(curentpuzzle)
-        final.append(curentpuzzle))
         moveable_tiles = moveable(curentpuzzle.moved_tile);
         for ti in (moveable_tiles):
-            dup = currentstate.board[::]
-            dup[cur.moved_tile] = dup[ti]
+            dup = currentpuzzle.board[::]
+            dup[currentpuzzle.moved_tile] = dup[ti]
             dup[ti] = 0
 
             repeat =0
             for state in visited:
-                if(state == cureentpuzzle)):
-                repeat =1
-                break
+                if(state == curentpuzzle):
+                    repeat =1
+                    break
           
             if (!repeat):
-                stat1 = stateNode(dup,ti,currentpuzzle))
+                stat1 = stateNode(dup,ti,currentpuzzle)
                 DFS(stat1,visited,Goal)
             
     
 
-        if (Goal == currentpuzzle).board) :
+        if (Goal == currentpuzzle).board :
+            final = currentpuzzle
             return
-    reconstruct(final[-1])
+    reconstruct(final)
 
 
 To tranverse through each node looking for goal state will take O(Vertices+Edges) =  O(N^2!/2+edges) time!  
@@ -245,7 +245,7 @@ using these cost function we are basically doing greedy search .It estimates how
             self.priority = priority
             self.moves = moves
 
-    startpuzzle = StateNode(board,0,None) 
+    startpuzzle = StateNode(board,0,None,huristic(board)) 
     Goal = [1,2,3,4,5,6....n]
     def A_star(startpuzzle,Goal):
         pqueue = [startpuzzle]
@@ -262,21 +262,21 @@ using these cost function we are basically doing greedy search .It estimates how
                     repeat =0
                     for state in visited:
                         if(state == cureentstate.board):
-                        repeat =1
-                        break
+                            repeat =1
+                            break
             
                     if (!repeat):   
                         stat1 = stateNode(dup,ti,currentstate,cur.moves + huristic(dup),curentstate.moves + 1)
                         pqueue.append(state1)
             
-    
-                final.append(curentstate)
+
                 sortqueue(pqueue)                   //sort based on priority 
                 if (Goal == currentstate.board) :
+                    final = currentstate
                     break
                 visited.append(curstate.board)
 
-    reconstruct(final[-1])
+    reconstruct(final)
 
 <img src="../../../../../15-puzzle/images/Aalgo.jpeg" alt="The_14-15_Puzzle_in_Puzzleland" width="600"/>   
 - worst-case time complexity: is exponential  
@@ -296,10 +296,35 @@ using these cost function we are basically doing greedy search .It estimates how
             self.priority = priority
             self.moves = moves
 
-    startpuzzle = StateNode(board,0,None) 
+
+    def IDA*(currentstate,visited,bound):
+        visited.append(curentstate)
+        moveable_tiles = moveable(curentstate.moved_tile);
+        for ti in (moveable_tiles):
+            dup = currentstate.board[::]
+            dup[currnetstate.moved_tile] = dup[ti]
+            dup[ti] = 0
+
+            repeat =0
+            for state in visited:
+                if(state == curentstate):
+                    repeat =1
+                    break
+          
+            if (!repeat && currnetstate.moves+huristic(dup)<=bound):
+                stat1 = stateNode(dup,ti,currentstate,currnetstate.moves + huristic(dup),curentstate.moves + 1)
+                search(stat1,visited,currnetstate.moves+huristic(dup))
+        if (Goal == currentpuzzle.board) :
+            final = currentstate
+            return
     
-    def ida_star(startpuzzle)
-     
+    startpuzzle = StateNode(board,0,None,huristic(board)) 
+    bound = huristic(startpuzzle)
+    IDA*(startpuzzle,visited,bound)
+    reconstruct(final)
+    
+    
+    
 
 
 
