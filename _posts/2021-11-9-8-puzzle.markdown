@@ -30,16 +30,16 @@ Final Arrangement&nbsp; &nbsp; <----->&nbsp; &nbsp; Final permutation
 Allowed moves using only &nbsp; &nbsp; &nbsp; transposition(switching two at a time)
 Fact: You can convert Any Permutation to any other permutation using only transposition.(puzzle constraint not applied)  
 Example:  
-1 2 3 4 5 to 3 4 5 2 1  
-1) steps :  
+1 2 3 4 5 to 3 4 5 2 1   
+1) steps :   
   1 2 3 4 5  
   5 2 3 4 1  
   3 2 5 4 1  
   3 4 5 2 1  
   
-  3 transposition  
-Another way to reach 1 2 3 4 5 t0 3 4 5 2 1   
-2) steps:  
+  3 transposition   
+Another way to reach 1 2 3 4 5 to 3 4 5 2 1     
+2) steps:   
  1 2 3 4 5  
  1 3 2 4 5  
  3 1 2 4 5  
