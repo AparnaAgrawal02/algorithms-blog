@@ -284,7 +284,10 @@ using these cost function we are basically doing greedy search .It estimates how
 - Main problem: space complexity is exponential    
 
 ### **IDA***
- It is a variant of iterative deepening depth-first search that borrows the idea to use a heuristic function to evaluate the remaining cost to get to the goal from the A* search algorithm. Since it is a depth-first search algorithm, its memory usage is lower than in A*, but unlike ordinary iterative deepening search, it concentrates on exploring the most promising nodes and thus does not go to the same depth everywhere in the search tree.  
+ It is a variant of iterative deepening depth-first search that borrows the idea to use a heuristic function to evaluate the remaining cost to get to the goal from the A* search algorithm. Since it is a depth-first search algorithm, its memory usage is lower than in A*, but unlike ordinary iterative deepening search, it concentrates on exploring the most promising nodes and thus does not go to the same depth everywhere in the search tree.   
+IDS(Iterative Deepening Search) calls DFS for different depths starting from an initial value. In every call, DFS is restricted from going beyond given depth. So basically we do DFS in a BFS fashion.combines depth-first search’s space-efficiency and breadth-first search’s fast search (for nodes closer to root)    
+IDA* = IDS+smart search   
+
 
     Goal = [1,2,3,4,5,6....n]
 
@@ -296,10 +299,23 @@ using these cost function we are basically doing greedy search .It estimates how
             self.priority = priority
             self.moves = moves
 
-
-    def IDA*(currentstate,visited,bound):
+    final = []
+    def IDA*():
+        startpuzzle = StateNode(board,0,None,huristic(board)) 
+            bound = huristic(startpuzzle)
+        while(1):
+            if(bound == sys.maxsize):
+                return -1
+            if(final==[]):
+                bound = search(startpuzzle,visited,bound)
+            else:
+                reconstruct(final)
+                break
+        
+    def search(currentstate,visited,bound):
         visited.append(curentstate)
         moveable_tiles = moveable(curentstate.moved_tile);
+        min = sys.maxsize
         for ti in (moveable_tiles):
             dup = currentstate.board[::]
             dup[currnetstate.moved_tile] = dup[ti]
@@ -310,18 +326,20 @@ using these cost function we are basically doing greedy search .It estimates how
                 if(state == curentstate):
                     repeat =1
                     break
-          
-            if (!repeat && currnetstate.moves+huristic(dup)<=bound):
+            f= currnetstate.moves+huristic(dup)
+            if (!repeat && f<=bound):
                 stat1 = stateNode(dup,ti,currentstate,currnetstate.moves + huristic(dup),curentstate.moves + 1)
-                search(stat1,visited,currnetstate.moves+huristic(dup))
+                t = search(stat1,visited,bound)
+                if(t<min):
+                    min = t
+            else if(!repeat && f>bound && min<f):
+                    min = f
+                
+
         if (Goal == currentpuzzle.board) :
             final = currentstate
-            return
+        return min
     
-    startpuzzle = StateNode(board,0,None,huristic(board)) 
-    bound = huristic(startpuzzle)
-    IDA*(startpuzzle,visited,bound)
-    reconstruct(final)
     
     
     
