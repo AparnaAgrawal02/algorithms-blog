@@ -49,7 +49,7 @@ Another way to reach 1 2 3 4 5 to 3 4 5 2 1
 
 5 transposition  
 There are many other ways 
-but it is impossible to do it  even number of transpositions.  
+but it is impossible to do it in  even number of transpositions.  
 
 Fact: The numbers of steps required is not fixed but parity of that number is fixed  
 
