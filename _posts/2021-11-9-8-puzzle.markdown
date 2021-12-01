@@ -251,30 +251,30 @@ using these cost function we are basically doing greedy search .It estimates how
         pqueue = [startpuzzle]
         visited = []
             while (pqueue):
-            curentstate = pqueue.pop()
-            visited.append(curentstate)
-            moveable_tiles = moveable(curstate.moved_tile);
-            for ti in (moveable_tiles):
-                dup = currentstate.board[::]
-                dup[cur.moved_tile] = dup[ti]
-                dup[ti] = 0
+                curentstate = pqueue.pop()
+                visited.append(curentstate)
+                moveable_tiles = moveable(curstate.moved_tile);
+                for ti in (moveable_tiles):
+                    dup = currentstate.board[::]
+                    dup[cur.moved_tile] = dup[ti]
+                    dup[ti] = 0
 
-            repeat =0
-            for state in visited:
-                if(state == cureentstate.board):
-                repeat =1
-                break
-          
-            if (!repeat):   
-                stat1 = stateNode(dup,ti,currentstate,cur.moves + huristic(dup),curentstate.moves + 1)
-                pqueue.append(state1)
+                    repeat =0
+                    for state in visited:
+                        if(state == cureentstate.board):
+                        repeat =1
+                        break
+            
+                    if (!repeat):   
+                        stat1 = stateNode(dup,ti,currentstate,cur.moves + huristic(dup),curentstate.moves + 1)
+                        pqueue.append(state1)
             
     
-        final.append(curentstate)
-        sortqueue(pqueue)                   //sort based on priority 
-        if (Goal == currentstate.board) :
-            break
-        visited.append(curstate.board)
+                final.append(curentstate)
+                sortqueue(pqueue)                   //sort based on priority 
+                if (Goal == currentstate.board) :
+                    break
+                visited.append(curstate.board)
 
     reconstruct(final[-1])
 
