@@ -192,7 +192,6 @@ Depth first search (DFS) algorithm starts with the initial node of the graph G, 
                 stat1 = stateNode(dup,ti,currentpuzzle)
                 DFS(stat1,visited,Goal)
             
-    
 
         if (Goal == currentpuzzle).board :
             final = currentpuzzle
@@ -307,7 +306,8 @@ IDA* = IDS+smart search
             if(bound == sys.maxsize):
                 return -1
             if(final==[]):
-                bound = search(startpuzzle,visited,bound)
+                bound = search(startpuzzle,visited,bound) //bound decides to how much depth it can search
+                                                        //set to min of priority of nodes that where > than bound 
             else:
                 reconstruct(final)
                 break
