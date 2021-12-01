@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Tower of Hanoi!!"
-date:   2021-11-7 14:24:45 +0530
+date:   2021-11-26 14:24:45 +0530
 categories: jekyll update
 ---
 Tower of hanoi is very famous and interesting game!

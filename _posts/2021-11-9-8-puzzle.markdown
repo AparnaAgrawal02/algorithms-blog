@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "15 puzzle!!"
-//date:   2021-11-06 14:24:45 +0530
+//date:   2021-11-22 14:24:45 +0530
 categories: jekyll update
 ---
 <iframe width="700" height="500" frameborder="0" scrolling="no" src="../../../../../15-puzzle/15-puzzle.html"></iframe>
@@ -30,7 +30,7 @@ Final Arrangement&nbsp; &nbsp; <----->&nbsp; &nbsp; Final permutation
 Allowed moves using only &nbsp; &nbsp; &nbsp; transposition(switching two at a time)
 Fact: You can convert Any Permutation to any other permutation using only transposition.(puzzle constraint not applied)  
 Example:  
-1 2 3 4 5 to 3 4 5 2 1
+1 2 3 4 5 to 3 4 5 2 1  
 1) steps :  
   1 2 3 4 5  
   5 2 3 4 1  
@@ -38,7 +38,7 @@ Example:
   3 4 5 2 1  
   
   3 transposition  
-Another way to reach 1 2 3 4 5 t0 3 4 5 2 1 
+Another way to reach 1 2 3 4 5 t0 3 4 5 2 1   
 2) steps:  
  1 2 3 4 5  
  1 3 2 4 5  
