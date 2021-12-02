@@ -73,7 +73,7 @@ As a result of the above procedure, the minimum number of moves h<sub>n</sub>  r
                   =  2<sup>3</sup>*h<sub>n-3</sub> + 2<sup>2</sup> + 2 + 1  
                   =2<sup>n-1</sup>*h<sub>n-(n-1)</sub> +2<sup>n</sup>+ …… + 2<sup>2</sup> + 2 + 1  
     h<sub>n</sub>=2<sup>n</sup>-1, 
-
+Thus time complexity of abov Algorithm is O(2^n)   
 we should look for another way to count the number of moves, such as how many times each of the individual discs is moved to complete the task.The largest disc moves once, or 1 (base 2) move;
 the second largest disc moves twice, or 10 (base 2) times ; the next largest disc moves four times, or 100 (base 2) times; and so on. That is, each of the terms in the sum, in the string of ones (base 2), corresponds to the number of moves made by a particular disc
   
@@ -171,6 +171,23 @@ Example for n = 3:
 when will the temple priests complete their task of moving all of the 64 disks?. The number of years to complete the task is at least: 2<sup>64</sup>-1 moves ie let us suppose that priests require 1 second to perform one move. At this speed, they would require 2<sup>64</sup>-1seconds to shift all discs from source tower to destination tower, which would be around 18,446,744,073,709,551,615 seconds, which would be approximately 580 billion years.(The earth is approximately 4.5 billion years old :))
 
 
+### Reve's puzzle(Tower of Hanoi problem with four pegs!)
+To find an optimal solution to find minimum steps to solve with  n>3 pegs is not as simple as it sounds.its been 
+Frame–Stewart algorithm
+The Frame–Stewart algorithm is described below:
+n = disks.
+k = pegs.
+T(n,k)  is minimum number of moves required to transfer n disks using k pegs.
+The algorithm can be described recursively:
+
+- For some l,0<=l< n, transfer the top l disks to a single peg other than the start or destination pegs, taking T(l,k) moves.  
+- Without disturbing the peg that now contains the top l disks, transfer the remaining n-l disks to the destination peg, using the remaining k-1 pegs, taking T(n-l,k-1) moves.  
+- Transfer the top l disks to the destination peg, taking T(l,k) moves. 
+
+- The entire process takes 2T(l,k)+T(n-l,k-1) moves. Therefore, the count l should be picked for which this quantity is minimum.   
+for 4-pegs, T(n,4) = 2T(l,4) +T(n-l,3) = 2T(l,4)+2<sup>n-l</sup>   
+the optimal l equals  the nearest integer to sqrt(2n).  
+
 <br/><br/>
 
 
@@ -179,7 +196,18 @@ when will the temple priests complete their task of moving all of the 64 disks?.
 [Towers of Hanoi – where programming techniques blend](http://www.acta.sapientia.ro/acta-info/C1-1/info1-8.pdf)  
 https://en.wikipedia.org/wiki/Tower_of_Hanoi
 
-
+<!-- 
+### Algorithm
+      def towerOfHanoi(N , source,aux1,aux2, destination):
+        if (n == 1):
+          print("Move disk 1 from ",source,"to ",destination)
+          return
+        towerOfHanoi(n – 2,source, aux1,aux2, destination)
+        print("Move disk", n-1, "from", source ," to ", aux2)
+        print("Move disk", n, "from",source,“to ”, destination)
+        print("Move disk", n-1, "from", aux2,“to ”, destination)
+        towerOfHanoi(n – 2, aux1,destinaion,source, aux2)
+ -->
 <!-- hello
 You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
 
